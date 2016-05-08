@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>INTERNUGS</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display: block;
+			}
+			div.floating {
+				color : #ffffff;
+				opacity : 0.8;
+				width : 80%;
+				height : 80%;
+				position : absolute;
+				left : 10%;
+				top : 100px;
+				padding : 10px;
+				display : none;
+				overflow : auto;
+				z-index: 100;
+			}
+			span.link {
+				color: skyblue;
+				cursor: pointer;
+				text-decoration : underline;
+			}
+			a {
+				color: skyblue
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="info">
+			<button onclick ="newShape()"> MAKE SHAPE </button>
+			<button onclick ="exportToObj()"> GET SHAPE </button>
+			<button onclick ="clearBox()"> CLEAR WINDOW </button> <br>
+			To get a shape as a .OBJ:<br>
+			1. Copy the contents of 'GET SHAPE' window.<br>
+			2. Paste into a text editor, like notepad.<br>
+			3. Save with file extension '.obj'
+		</div>
+
+		<script src="js/three.js"></script>
+		<script src="js/OBJExporter.js"></script>
+		<script src="js/ConvexGeometry.js"></script>
+		<script src="js/Detector.js"></script>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var camera, scene, light, renderer;
+			var floatingDiv;
+			var mouseX = 0, mouseY = 0;
+
+			function clearBox()
+            {
+  			while (floatingDiv.hasChildNodes())
+  			floatingDiv.removeChild(floatingDiv.lastChild);
+			}
+
+			function exportToObj() {
+				var exporter = new THREE.OBJExporter();
+				var result = exporter.parse( scene );
+				floatingDiv.style.display = 'block';
+				floatingDiv.innerHTML = result.split( '\n' ).join ( '<br />' );
+			}
+
+
+
+			function random_int_within_range (min, max) {
+				return Math.floor(Math.random() * (max - min) + min)
+			}
+
+			function newShape () {
+
+				scene.remove(scene.children[0]) 
+
+				var points = [];
+
+				for (var i = 0; i < random_int_within_range(8, 50); i++) {
+					points.push(new THREE.Vector3( Math.random()*200-100, Math.random()*200-100, Math.random()*200-100 ))
+				};
+				
+				var imgs = [];
+				for (var i = 1; i < 40; i++) {
+  					imgs.push("imgs/" + i + ".jpeg");
+				};
+
+				var ranIdx = Math.floor(Math.random()*imgs.length);
+
+				map = THREE.ImageUtils.loadTexture(imgs[ranIdx]);
+				geometry = new THREE.ConvexGeometry( points );
+				material = new THREE.MeshBasicMaterial({shading: THREE.FlatShading, map: map, color:0xffffff});
+				mesh = new THREE.Mesh(geometry, material);
+				scene.add(mesh);
+
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.y += ( -mouseY - camera.position.y ) * .05;
+				camera.lookAt( scene.position );
+				renderer.render( scene, camera );
+				light.position.set( camera.position.x, camera.position.y, camera.position.z ).normalize();
+				renderer.render( scene, camera );
+			}
+
+			function onDocumentMouseMove( event ) {
+				var windowHalfX = window.innerWidth / 2;
+				var windowHalfY = window.innerHeight / 2;
+				mouseX = ( event.clientX - windowHalfX ) / 2;
+				mouseY = ( event.clientY - windowHalfY ) / 2;
+
+			}
+
+
+
+
+
+			function setup () {
+
+				var W = window.innerWidth, H = window.innerHeight;
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize( W, H );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.set( 0, 0, 400 );
+				scene = new THREE.Scene();
+				light = new THREE.DirectionalLight( 0xffffff );
+
+
+				newShape();
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mouseover', onDocumentMouseMove, false );
+
+
+				floatingDiv = document.createElement( 'div' );
+				floatingDiv.className = 'floating';
+				document.body.appendChild( floatingDiv );
+			}
+
+
+			
+
+
+			setup();
+			animate();
+
+		</script>
+		
+	</body>
+</html>
