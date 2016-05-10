@@ -45,7 +45,7 @@
 	</head>
 	<body>
 
-		<div id="info">
+		<div id="info"> <!--This is for the buttons that acctivate the functions-->
 			<button onclick ="newShape()"."clearBox()"> MAKE SHAPE </button>
 			<button onclick ="exportToObj()"> PREP SHAPE </button>
 			<button id="download"> GET SHAPE </button>
@@ -55,25 +55,28 @@
 			2. Once the information is being displayed, click on GET SHAPE button.<br>
 			If you have difficulty downloading, copy the information displayed into a text file and change file extension to '.obj'
 		</div>
-
+		<!--below are the necessery js files to run the functions. these scripts are available through mrdoob's three.js repository.-->
 		<script src="js/three.js"></script>
 		<script src="js/OBJExporter.js"></script>
 		<script src="js/ConvexGeometry.js"></script>
 		<script src="js/Detector.js"></script>
 		<script>
-
+			//below is a function that detects if the users browser is compatable with three.js
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
 
 			var camera, scene, light, renderer;
 			var floatingDiv;
 			var mouseX = 0, mouseY = 0;
 
+			// The clearBox function clears the contents of the node 'floatingDiv' so to empty the users screen
 			function clearBox()
             {
   			while (floatingDiv.hasChildNodes())
   			floatingDiv.removeChild(floatingDiv.lastChild);
 			}
 
+			// exportToObj function is what does the actual parsing of the model into a usable format. This set up tells it to fill the node 'floatingDiv' with the result of the parse. floatingDiv.innerHTML creates the a version formatted for in browser display, while floatingDiv.innerHTML2 creates a plain text version that is usable in the downloaded file
 			function exportToObj() {
 				var exporter = new THREE.OBJExporter();
 				var result = exporter.parse( scene );
@@ -84,7 +87,7 @@
 			}
 
 
-
+			// The functions below are used to create the shape itself. random_int_within_range sets up a randomizer which is referenced in the newShape function. newShape handles the generating of points, the choosing of a random image to put on the shape (as a map), and adding that mesh to the scene
 			function random_int_within_range (min, max) {
 				return Math.floor(Math.random() * (max - min) + min)
 			}
@@ -95,10 +98,12 @@
 
 				var points = [];
 
+				// This for loop creates a random number of points, between 8-50, and assigns them spatial values, between -100-100
 				for (var i = 0; i < random_int_within_range(8, 50); i++) {
 					points.push(new THREE.Vector3( Math.random()*200-100, Math.random()*200-100, Math.random()*200-100 ))
 				};
 				
+				// This loop pulls a random image from the folder .imgs that is located in the same root directory
 				var imgs = [];
 				for (var i = 1; i < 40; i++) {
   					imgs.push("imgs/" + i + ".jpeg");
@@ -106,6 +111,7 @@
 
 				var ranIdx = Math.floor(Math.random()*imgs.length);
 
+				// These turn the point cloud and image into a single mesh, and attatch that mesh to the scene
 				map = THREE.ImageUtils.loadTexture(imgs[ranIdx]);
 				geometry = new THREE.ConvexGeometry( points );
 				material = new THREE.MeshBasicMaterial({shading: THREE.FlatShading, map: map, color:0xffffff});
@@ -113,7 +119,7 @@
 				scene.add(mesh);
 
 			}
-
+			// The animate function makes the shape move in response to the users mouse movement.
 			function animate() {
 				requestAnimationFrame( animate );
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
@@ -135,7 +141,7 @@
 
 
 
-
+			// The setup function loads the three.js renderer and creates our scene and scene elements (camera, lighting, so on)
 			function setup () {
 
 				var W = window.innerWidth, H = window.innerHeight;
@@ -160,10 +166,9 @@
 				document.body.appendChild( floatingDiv );
 			}
 
-
+			// The functions below handle downloading the contents of the floatingDiv element into a usable .obj.
 			var dlButton = document.getElementById('download');
 
-		
 			dlButton.onclick = function() {
 
 		  	var a = document.createElement("a"); // create an a element		  
@@ -173,7 +178,7 @@
 		  			});
       
 		 		a.href = URL.createObjectURL(file); // assign object url from the blob to the a's href
-		  		a.download = 'shape.obj'; // name the file, u'll probably use something .obj instead 
+		  		a.download = 'shape.obj'; // name the file
 		  		a.click(); // force click it to automatically trigger the downlaod
 
 			};
