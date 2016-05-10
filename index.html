@@ -46,13 +46,14 @@
 	<body>
 
 		<div id="info">
-			<button onclick ="newShape()"> MAKE SHAPE </button>
-			<button onclick ="exportToObj()"> GET SHAPE </button>
-			<button onclick ="clearBox()"> CLEAR WINDOW </button> <br>
+			<button onclick ="newShape()"."clearBox()"> MAKE SHAPE </button>
+			<button onclick ="exportToObj()"> PREP SHAPE </button>
+			<button id="download"> GET SHAPE </button>
+			<button onclick ="clearBox()"> CLEAR TEXT </button> <br>
 			To get a shape as a .OBJ:<br>
-			1. Copy the contents of 'GET SHAPE' window.<br>
-			2. Paste into a text editor, like notepad.<br>
-			3. Save with file extension '.obj'
+			1. Click on PREP SHAPE button.<br>
+			2. Once the information is being displayed, click on GET SHAPE button.<br>
+			If you have difficulty downloading, copy the information displayed into a text file and change file extension to '.obj'
 		</div>
 
 		<script src="js/three.js"></script>
@@ -78,6 +79,8 @@
 				var result = exporter.parse( scene );
 				floatingDiv.style.display = 'block';
 				floatingDiv.innerHTML = result.split( '\n' ).join ( '<br />' );
+				floatingDiv.innerHTML2 = result;
+
 			}
 
 
@@ -158,7 +161,23 @@
 			}
 
 
-			
+			var dlButton = document.getElementById('download');
+
+		
+			dlButton.onclick = function() {
+
+		  	var a = document.createElement("a"); // create an a element		  
+
+		  		var file = new Blob([floatingDiv.innerHTML2], { // create new text blob
+		    		type: 'text/html'
+		  			});
+      
+		 		a.href = URL.createObjectURL(file); // assign object url from the blob to the a's href
+		  		a.download = 'shape.obj'; // name the file, u'll probably use something .obj instead 
+		  		a.click(); // force click it to automatically trigger the downlaod
+
+			};
+		
 
 
 			setup();
