@@ -13,6 +13,17 @@ e.g. filling an environment in Unity for a more dynamic game
 http://danielgiroux.net/NETART-master/netart/
 
 ##Example Use
+Click Make Shape
+![alt text](images/1.png "Click Make Shape")
+Click Prep Shape
+![alt text](images/2.png "Click Prep Shape")
+Click Get Shape it downloads the .obj
+![alt text](images/3.png "Click Get Shape")
+Clear Text
+![alt text](images/4.png "Clear Text")
+Open it up in your favorite .obj editor!
+![alt text](images/5.png "Photoshop")
+
 
 
 ##License
