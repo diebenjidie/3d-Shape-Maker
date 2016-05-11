@@ -17,14 +17,12 @@ display: block;
 
 div.floating {
 color : #ffffff;
-background : none;
 opacity : 0.8;
 width : 80%;
 height : 80%;
 position : absolute;
 left : 10%;
-top : 10%;
-border : 1px solid #555555;
+top : 100px;
 padding : 10px;
 display : none;
 overflow : auto;
