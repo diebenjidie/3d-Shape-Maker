@@ -1,38 +1,58 @@
 body {
-				font-family: Monospace;
-				background-color: #000000;
-				margin: 0px;
-				overflow: hidden;
-			}
-			#info {
-				color: #fff;
-				position: absolute;
-				top: 10px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				display: block;
-			}
-			div.floating {
-				color : #ffffff;
-				background : #000000;
-				opacity : 0.8;
-				width : 80%;
-				height : 80%;
-				position : absolute;
-				left : 10%;
-				top : 10%;
-				border : 1px solid #555555;
-				padding : 10px;
-				display : none;
-				overflow : auto;
-				z-index: 100;
-			}
-			span.link {
-				color: skyblue;
-				cursor: pointer;
-				text-decoration : underline;
-			}
-			a {
-				color: skyblue
-			}
+font-family: sans-serif;
+background-color: #000000;
+margin: 0px;
+overflow: hidden;
+}
+
+#info {
+color: #fff;
+position: absolute;
+top: 10px;
+width: 100%;
+text-align: center;
+z-index: 100;
+display: block;
+}
+
+div.floating {
+color : #ffffff;
+background : none;
+opacity : 0.8;
+width : 80%;
+height : 80%;
+position : absolute;
+left : 10%;
+top : 10%;
+border : 1px solid #555555;
+padding : 10px;
+display : none;
+overflow : auto;
+z-index: 100;
+}
+
+span.link {
+color: skyblue;
+cursor: pointer;
+text-decoration : underline;
+}
+
+a {
+color: skyblue
+}
+
+#bgcontainer_gradient {
+    background:linear-gradient(135deg, #b566dc, #a1dbff, #a1ffc4);
+    background-size:600% 600%;
+	animation:gradiation 20s ease infinite;
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:1;
+}
+
+@keyframes gradiation { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}

@@ -1,47 +1,33 @@
 <!DOCTYPE html>
+<!-- A 3JS with Dan Giroux and benji, basically a random shape generator for all your .obj needs! currently the download functionality works with Google Chrome only-->
 <html lang="en">
 	<head>
-		<title>INTERNUGS</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #000000;
-				margin: 0px;
-				overflow: hidden;
-			}
-			#info {
-				color: #fff;
-				position: absolute;
-				top: 10px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				display: block;
-			}
-			div.floating {
-				color : #ffffff;
-				opacity : 0.8;
-				width : 80%;
-				height : 80%;
-				position : absolute;
-				left : 10%;
-				top : 100px;
-				padding : 10px;
-				display : none;
-				overflow : auto;
-				z-index: 100;
-			}
-			span.link {
-				color: skyblue;
-				cursor: pointer;
-				text-decoration : underline;
-			}
-			a {
-				color: skyblue
-			}
-		</style>
+		 <!-- for Google+ -->
+        <meta itemprop="name" content="INTERNUGS">
+        <meta itemprop="description" content="Random 3JS .obj generator and downloader!">
+        <meta itemprop="image" content="images/icon.png">
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@dangeroux97">
+        <meta name="twitter:title" content="INTERNUGS">
+        <meta name="twitter:description" content="Random 3JS .obj generator and downloader!">
+        <meta name="twitter:creator" content="@dangeroux97">
+        <!-- Twitter summary card with large image must be at least 280x150px -->
+        <meta name="twitter:image:src" content="images/twittercard.png">
+        <!-- for Facebook -->
+        <meta property="og:title" content="INTERNUGS" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://danielgiroux.net/NETART-master/netart/" />
+        <meta property="og:image" content="images/icon.png" />
+        <meta property="og:description" content="Random 3JS .obj generator and downloader!" />
+        <meta property="og:site_name" content="INTERNUGS" />
+        <title>INTERNUGS</title>
+		<link rel="author" href="humans.txt">
+        <link rel="icon" type="image/png" href="images/icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="images/icon.png" />
+		<link rel="stylesheet" href="css/netart.css">
 	</head>
 	<body>
 
@@ -55,6 +41,7 @@
 			2. Once the information is being displayed, click on GET SHAPE button.<br>
 			If you have difficulty downloading, copy the information displayed into a text file and change file extension to '.obj'
 		</div>
+		<!-- <div id="bgcontainer_gradient"></div> -->
 		<!--these scripts are available through mrdoob's three.js repository.-->
 		<script src="js/three.js"></script>
 		<script src="js/OBJExporter.js"></script>
@@ -190,6 +177,14 @@
 			animate();
 
 		</script>
+		 <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-75243713-1', 'auto');
+        ga('send', 'pageview');
+        </script>
 		
 	</body>
 </html>
