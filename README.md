@@ -1,4 +1,4 @@
-#INTERNUGS
+#MAKESHAPES
 
 ##Synopsis
 A 3js experiment by dangeroux and diebenjidie
