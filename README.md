@@ -10,7 +10,7 @@ The website serves as a random object generator, it's great for any project that
 e.g. filling an environment in Unity for a more dynamic game
 
 ##Installation
-http://danielgiroux.net/NETART-master/netart/
+http://danielgiroux.net/netart/netart/
 
 ##Example Use
 Click Make Shape
